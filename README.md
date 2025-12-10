@@ -1,289 +1,116 @@
-# App Móvil de Recetas y Planificador de Comidas — Recuperación de Módulo
+# App Móvil de Recetas y Planificador de Comidas
 
-## Descripción
+Aplicación móvil multiplataforma desarrollada con React Native CLI + TypeScript que permite buscar recetas, ver detalles, guardar favoritos, crear un plan semanal de comidas y almacenar datos localmente. El proyecto integra consumo de APIs, almacenamiento local, navegación, diseño UX/UI, pruebas y despliegue básico. Es una app de recetas/planificación alimentaria pensada para uso real.
 
-Aplicación móvil desarrollada con React Native y TypeScript que permite a los usuarios buscar recetas, gestionar favoritos y planificar comidas semanales. Este proyecto forma parte de la recuperación del módulo de Técnico en Desarrollo de Software, implementando una solución completa que integra consumo de APIs externas, persistencia local de datos y una interfaz de usuario intuitiva.
+**Proyecto de recuperación del módulo Técnico en Desarrollo de Software.**
 
-La aplicación utiliza la API de Spoonacular para obtener información detallada de recetas, incluyendo ingredientes, instrucciones de preparación, tiempos de cocción y valores nutricionales, proporcionando una experiencia completa para la planificación culinaria.
+## Características principales
 
-## Objetivos del Proyecto
+- **Pantalla Home**: listado de recetas con paginación o búsqueda.
+- **Búsqueda por ingrediente/nombre**.
+- **Detalle de receta**: ingredientes, pasos, tiempo, imágenes.
+- **Favoritos**: marcar/desmarcar recetas (persistencia local con AsyncStorage).
+- **Planificador semanal**: asignar recetas a días (guardar localmente).
+- **Offline**: ver recetas guardadas sin conexión.
+- **(Opcional) Autenticación básica** (registro/login) — no implementada para priorizar MVP.
 
-- Desarrollar una aplicación móvil multiplataforma utilizando React Native CLI y TypeScript
-- Implementar un sistema de navegación intuitivo con pestañas y navegación por stack
-- Integrar servicios externos mediante el consumo de APIs REST (Spoonacular API)
-- Gestionar el estado global de la aplicación utilizando React Context
-- Implementar persistencia local de datos con AsyncStorage
-- Crear una interfaz de usuario responsive y accesible con React Native Paper
-- Aplicar patrones de arquitectura limpia y buenas prácticas de desarrollo
-- Desarrollar funcionalidades offline básicas para mejorar la experiencia del usuario
+## Tecnologías utilizadas (Stack sugerido y usado)
 
-## Funcionalidades Principales
+- **React Native (CLI)** con TypeScript.
+- **Navegación**: @react-navigation/native (Bottom Tabs + Stack Navigator).
+- **Estado**: React Context + hooks (FavoritesContext y PlannerContext).
+- **Almacenamiento local**: @react-native-async-storage/async-storage.
+- **Consumo API**: Axios (integrado con Spoonacular API).
+- **UI**: React Native Paper para componentes Material Design.
+- **Variables de entorno**: react-native-dotenv (.env.example incluido).
+- **Prototipado**: Figma (opcional, no incluido en repo).
 
-### MVP (Producto Mínimo Viable)
+## Requisitos previos
 
-- **Pantalla de Inicio con Búsqueda**: Búsqueda de recetas por nombre y visualización de recetas aleatorias
-- **Detalle de Receta**: Información completa incluyendo ingredientes, instrucciones, tiempo de preparación y porciones
-- **Sistema de Favoritos**: Guardar y gestionar recetas favoritas con persistencia local
-- **Planificador Semanal**: Organización de comidas por días de la semana utilizando recetas favoritas
-- **Persistencia Local**: Almacenamiento offline de favoritos y planificación semanal
-- **Funcionalidad Offline Básica**: Acceso a datos guardados sin conexión a internet
+- Node.js ≥ 18.
+- npm o yarn.
+- Android Studio (para emulador y SDK) o dispositivo Android con modo desarrollador.
+- Java JDK 17 o superior (para builds Android).
+- Cuenta en Spoonacular API (clave gratuita en .env).
 
-### Funcionalidades Adicionales
+## Cómo ejecutar la aplicación
 
-- Interfaz de usuario moderna con Material Design
-- Navegación fluida entre pantallas
-- Gestión de estados de carga y error
-- Optimización de imágenes y rendimiento
-- Validación de formularios y entrada de datos
-
-## Stack Tecnológico
-
-### Framework y Lenguajes
-- **React Native CLI** - Framework de desarrollo móvil multiplataforma
-- **TypeScript** - Superset de JavaScript con tipado estático
-- **JavaScript ES6+** - Lenguaje base con características modernas
-
-### Navegación y UI
-- **@react-navigation/native** - Sistema de navegación principal
-- **@react-navigation/stack** - Navegación por stack
-- **@react-navigation/bottom-tabs** - Navegación por pestañas
-- **React Native Paper** - Biblioteca de componentes UI con Material Design
-- **React Native Vector Icons** - Iconografía vectorial
-- **React Native Safe Area Context** - Manejo de áreas seguras
-
-### Gestión de Estado y Datos
-- **React Context API** - Gestión de estado global
-- **@react-native-async-storage/async-storage** - Persistencia local de datos
-- **Axios** - Cliente HTTP para consumo de APIs
-
-### APIs y Servicios
-- **Spoonacular API** - API externa para información de recetas
-- **React Native Dotenv** - Gestión de variables de entorno
-
-### Herramientas de Desarrollo
-- **Metro** - Bundler de React Native
-- **Babel** - Transpilador de JavaScript
-- **ESLint** - Linter de código
-- **Jest** - Framework de testing
-- **React Native Gesture Handler** - Manejo de gestos
-
-## Estructura del Repositorio
-
-```
-recipe-app/
-├── src/
-│   ├── components/
-│   │   ├── DayPlanner.tsx
-│   │   ├── RecipeCard.tsx
-│   │   ├── RecipeItem.tsx
-│   │   └── SearchBar.tsx
-│   ├── context/
-│   │   ├── FavoritesContext.tsx
-│   │   └── PlannerContext.tsx
-│   ├── navigation/
-│   │   └── AppNavigator.tsx
-│   ├── screens/
-│   │   ├── FavoritesScreen.tsx
-│   │   ├── HomeScreen.tsx
-│   │   ├── PlannerScreen.tsx
-│   │   └── RecipeDetailScreen.tsx
-│   ├── services/
-│   │   ├── api.ts
-│   │   └── storage.ts
-│   └── types/
-│       ├── index.ts
-│       └── env.d.ts
-├── android/
-├── ios/
-├── App.tsx
-├── index.js
-├── package.json
-├── tsconfig.json
-├── babel.config.js
-├── metro.config.js
-├── jest.config.js
-├── .env.example
-├── .gitignore
-└── README.md
-```
-
-## Requisitos Previos
-
-### Software Necesario
-- **Node.js** (versión 16 o superior)
-- **npm** o **yarn** (gestor de paquetes)
-- **React Native CLI** instalado globalmente
-- **Android Studio** (para desarrollo Android)
-- **Xcode** (para desarrollo iOS - solo macOS)
-- **Java Development Kit (JDK)** versión 11 o superior
-
-### Configuración del Entorno
-- **Android SDK** configurado correctamente
-- **Emulador Android** o dispositivo físico para pruebas
-- **Simulador iOS** (solo macOS) o dispositivo físico
-- **Variables de entorno** configuradas (ANDROID_HOME, PATH)
-
-### Cuenta de API
-- Cuenta gratuita en [Spoonacular](https://spoonacular.com/food-api) para obtener API Key
-
-## Instalación y Configuración
-
-### 1. Clonar el Repositorio
+### Clonar el repositorio
 ```bash
-git clone https://github.com/tu-usuario/recipe-app.git
-cd recipe-app
+git clone https://github.com/Santiago04-C/Recuperaci-n-App-Recetas.git
+cd Recuperaci-n-App-Recetas
 ```
 
-### 2. Instalar Dependencias
+### Instalar dependencias
 ```bash
 npm install
-# o alternativamente
-yarn install
+# o con yarn
+# yarn install
 ```
 
-### 3. Configurar Variables de Entorno
+### Configurar variables de entorno
+Copia el archivo de ejemplo y agrega tu clave API de Spoonacular:
 ```bash
-# Copiar el archivo de ejemplo
 cp .env.example .env
+```
+Edita .env con tu clave (ej. SPOONACULAR_API_KEY=tu-clave).
 
-# Editar el archivo .env y agregar tu API Key
-SPOONACULAR_API_KEY=tu_api_key_de_spoonacular_aqui
+### Iniciar el emulador Android
+(desde Android Studio) o conecta un dispositivo Android con USB debugging activado.
+
+### Ejecutar la aplicación
+Inicia el Metro bundler:
+```bash
+npx react-native start
 ```
 
-### 4. Configurar Android (si es necesario)
+En otra terminal, compila y ejecuta en Android:
 ```bash
-# Verificar configuración de Android
-npx react-native doctor
-
-# Si hay problemas, seguir las instrucciones mostradas
+npx react-native run-android
 ```
 
-### 5. Instalar Dependencias iOS (solo macOS)
+La app se instalará y abrirá automáticamente en el emulador o dispositivo.
+
+## Cómo generar el APK (para Android)
+
+### 1. Configura el keystore (clave de firma) en la raíz del proyecto:
 ```bash
-cd ios
-pod install
-cd ..
+keytool -genkeypair -v -keystore my-release-key.keystore -keyalg RSA -keysize 2048 -validity 10000 -alias my-key-alias
+```
+(Sigue las instrucciones para contraseña y datos).
+
+### 2. Mueve my-release-key.keystore a android/app/.
+
+### 3. Edita android/gradle.properties con tus contraseñas:
+```text
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+MYAPP_RELEASE_STORE_PASSWORD=tu_contraseña
+MYAPP_RELEASE_KEY_PASSWORD=tu_contraseña
 ```
 
-## Cómo Ejecutar la Aplicación
+### 4. Agrega configuración en android/app/build.gradle (dentro de android { ... }):
+```text
+signingConfigs {
+    release {
+        storeFile file(MYAPP_RELEASE_STORE_FILE)
+        storePassword MYAPP_RELEASE_STORE_PASSWORD
+        keyAlias MYAPP_RELEASE_KEY_ALIAS
+        keyPassword MYAPP_RELEASE_KEY_PASSWORD
+    }
+}
 
-### Iniciar Metro Bundler
-```bash
-npm start
-# o
-yarn start
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+    }
+}
 ```
 
-### Ejecutar en Android
+### 5. Genera el APK:
 ```bash
-# Con emulador Android ejecutándose
-npm run android
-
-# o con yarn
-yarn android
-
-# Para dispositivo específico
-npx react-native run-android --deviceId=DEVICE_ID
-```
-
-### Ejecutar en iOS (solo macOS)
-```bash
-# Con simulador iOS
-npm run ios
-
-# o con yarn
-yarn ios
-
-# Para simulador específico
-npx react-native run-ios --simulator="iPhone 14"
-```
-
-### Comandos de Desarrollo Adicionales
-```bash
-# Limpiar caché de Metro
-npm start -- --reset-cache
-
-# Ejecutar tests
-npm test
-
-# Linting del código
-npm run lint
-```
-
-## Cómo Generar el APK
-
-### APK de Debug
-```bash
-cd android
-./gradlew assembleDebug
-# El APK se genera en: android/app/build/outputs/apk/debug/
-```
-
-### APK de Release
-```bash
-# Generar keystore (solo la primera vez)
-keytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
-
-# Configurar gradle.properties con las credenciales del keystore
-# Luego generar el APK
 cd android
 ./gradlew assembleRelease
-# El APK se genera en: android/app/build/outputs/apk/release/
 ```
 
-### Bundle de Release (recomendado para Play Store)
-```bash
-cd android
-./gradlew bundleRelease
-# El bundle se genera en: android/app/build/outputs/bundle/release/
-```
-
-## Entregables Incluidos
-
-Este proyecto de recuperación incluye los siguientes entregables:
-
-- **Código Fuente Completo**: Aplicación React Native con TypeScript completamente funcional
-- **Documentación Técnica**: README detallado con instrucciones de instalación y uso
-- **Video Demostración**: Grabación mostrando todas las funcionalidades implementadas
-- **APK de Prueba**: Archivo de instalación para dispositivos Android
-- **Documento de Arquitectura**: Explicación de patrones y decisiones técnicas implementadas
-- **Manual de Usuario**: Guía de uso de la aplicación para usuarios finales
-- **Casos de Prueba**: Documentación de testing y validación de funcionalidades
-
-## Capturas de Pantalla
-
-### Pantalla de Inicio
-![Pantalla de Inicio](./screenshots/home-screen.png)
-*Búsqueda de recetas y visualización de recetas aleatorias*
-
-### Detalle de Receta
-![Detalle de Receta](./screenshots/recipe-detail.png)
-*Información completa de la receta con ingredientes e instrucciones*
-
-### Pantalla de Favoritos
-![Favoritos](./screenshots/favorites-screen.png)
-*Gestión de recetas guardadas como favoritas*
-
-### Planificador Semanal
-![Planificador](./screenshots/planner-screen.png)
-*Organización de comidas por días de la semana*
-
-### Navegación por Pestañas
-![Navegación](./screenshots/tab-navigation.png)
-*Sistema de navegación intuitivo con pestañas inferiores*
-
-## Autor
-
-**[Tu Nombre Completo]**
-- Estudiante de Técnico en Desarrollo de Software
-- Proyecto de Recuperación de Módulo
-- Contacto: [tu-email@ejemplo.com]
-- GitHub: [https://github.com/tu-usuario]
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-*Proyecto desarrollado como parte de la recuperación del módulo de Técnico en Desarrollo de Software. Implementa las mejores prácticas de desarrollo móvil con React Native y TypeScript.*
+El APK estará en `android/app/build/outputs/apk/release/app-release.apk`.
